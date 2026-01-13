@@ -19,18 +19,25 @@
 #define LF  0x0A
 #define CR  0x0D
 
-static uint8_t tic_checksum(const char *label, const char *value)
+static uint8_t tic_checksum_historique(const char *label,
+                                       const char *value)
 {
     uint8_t sum = 0;
-    const char *p;
 
-    for (p = label; *p; p++) sum += *p;
-    sum += ' ';
-    for (p = value; *p; p++) sum += *p;
-    sum += ' ';
+    for (const char *p = label; *p; p++) {
+        sum += *p;
+    }
+
+    sum += 0x20;  // SP between label and value
+
+    for (const char *p = value; *p; p++) {
+        sum += *p;
+    }
 
     return (sum & 0x3F) + 0x20;
 }
+
+#define tic_checksum(...) tic_checksum_historique(__VA_ARGS__)
 
 static void linky_task(void *arg)
 {
