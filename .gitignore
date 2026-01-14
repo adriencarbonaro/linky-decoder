@@ -1,3 +1,8 @@
-build
 .vscode/
-logs
+
+build/
+logs/
+
+# Files generated automatically
+main/version.h
+sdkconfig*
