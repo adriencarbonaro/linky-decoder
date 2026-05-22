@@ -1,11 +1,7 @@
-# Bird-Box Makefile
-# Wrapper around ESP-IDF CMake/Ninja build system with Git versioning
-
 # Paths
 PROJECT_DIR := $(CURDIR)
 BUILD_DIR := $(PROJECT_DIR)/build
 SCRIPT_DIR := $(PROJECT_DIR)/scripts
-VERSION_FILE := $(PROJECT_DIR)/main/version.h
 
 # Toolchain setup
 export PATH := $(IDF_PATH)/tools:$(PATH)
@@ -22,7 +18,7 @@ export BATCH_BUILD=1
 all: build
 
 version:
-	python $(SCRIPT_DIR)/build_version.py
+	python $(SCRIPT_DIR)/build_version.py $(BUILD_DIR)/version.h .
 
 # --- Build rules ---
 menuconfig:
@@ -45,7 +41,6 @@ clean:
 
 fullclean:
 	idf.py fullclean
-	rm -f $(VERSION_FILE)
 
 reconfigure:
 	idf.py reconfigure

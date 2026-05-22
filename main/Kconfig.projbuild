@@ -1,0 +1,25 @@
+menu "Linky Decoder"
+
+    config UART_RX_PIN
+        int "UART RX pin number"
+        default 20
+        help
+            UART communication RX pin number
+
+    config DEVICE_ID
+        string "The Home Assistant device ID (lowercase)"
+        default "linky_decoder"
+
+    config DEVICE_NAME
+        string "The Home Assistant device name"
+        default "Linky Decoder"
+
+    config MANUFACTURER
+        string "The Home Assistant manufacturer name"
+        default "Carbonaro"
+
+    config MODEL
+        string "The Home Assistant model name"
+        default "ESP32-C3"
+
+endmenu

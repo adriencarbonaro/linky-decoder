@@ -1,0 +1,4 @@
+dependencies:
+  # TEMP: on-board WS2812 RGB LED, used only by the HA command test in
+  # ha_entities.c. Drop this once the test entity is removed.
+  espressif/led_strip: "^2.5.5"
