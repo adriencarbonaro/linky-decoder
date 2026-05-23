@@ -7,8 +7,8 @@ idf_component_register(
     SRCS ${srcs}
     INCLUDE_DIRS "."
     REQUIRES esp_driver_uart
-             mqtt-driver
-             ha
+             ha-mqtt
+             wifi
 )
 
 # Resolve version.h, generated into the build dir by the Makefile `version`

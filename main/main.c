@@ -25,7 +25,6 @@ static void on_mqtt_connect(void)
     /* (Re)publish HA discovery, then drop the TIC value cache so the next
      * parsed frame republishes every label - covers a broker that lost its
      * retained messages (restart without persistence). */
-    ha_publish_discovery();
     tic_cache_reset();
 }
 
@@ -39,10 +38,7 @@ void app_main(void)
     /* TIC decoder on the UART. */
     uart_init(tic_decode);
 
-    /* Connectivity: wifi + mqtt are the project's to drive. The HA layer
-     * owns the availability topic convention, so it feeds the LWT. */
-    EventGroupHandle_t wifi_event_group = xEventGroupCreate();
-    wifi_init(wifi_event_group);
     mqtt_set_on_connect(on_mqtt_connect);
-    mqtt_start(wifi_event_group, ha_availability_topic());
+
+    wifi_init(mqtt_start, NULL);
 }
